@@ -1,16 +1,18 @@
-const express = require('./node_modules/express')
 const mongoose = require('mongoose')
 
-require('./node_modules/dotenv/lib/main').config({ path: 'variables.env' })
+require('dotenv').config({ path: 'variables.env' })
 
 // Connect to database and handle errors
-
-mongoose.connect(process.env.DATABASE)
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+})
 
 mongoose.connection.on('error', err => console.error(err.message))
 
 // import all models
 require('./models/User')
+require('./models/Recipe')
 
 const app = require('./app')
 
