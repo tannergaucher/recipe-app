@@ -1,0 +1,3 @@
+- Add JWT auth
+- add userContext with isLoggedIn bool
+- create related data

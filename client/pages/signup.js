@@ -1,12 +1,12 @@
 import React from 'react'
 
 import { Layout } from '../components/elements'
-import { Login } from '../components/user'
+import { Signup } from '../components/user'
 
-export default function LoginPage() {
+export default function Login() {
   return (
     <Layout>
-      <Login />
+      <Signup />
     </Layout>
   )
 }
