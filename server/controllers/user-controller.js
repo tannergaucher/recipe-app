@@ -1,15 +1,22 @@
+const { hash } = require('bcrypt')
+const { sign } = require('jsonwebtoken')
 const mongoose = require('mongoose')
 const User = mongoose.model('User')
 
-exports.signup = (req, res, next) => {
-  const { email, name, password } = req.body
-  // TODO: HASH THE PASSWORD
-  const newUser = new User({ email, name, password })
-  newUser
-    .save()
-    // TODO: send the token along in a cookie
-    .then(() => res.json('New user added'))
-    .catch(err => res.status(400).json(`Error: ${err.message}`))
+exports.signup = async (req, res, next) => {
+  try {
+    const { email, name, password } = req.body
+    const hashedPassword = await hash(password, 10)
+    const newUser = await new User({
+      email,
+      name,
+      password: hashedPassword,
+    }).save()
+
+    res.status(200).json({ token })
+  } catch (error) {
+    res.status(400).json({ error })
+  }
 }
 
 exports.login = (req, res, next) => {

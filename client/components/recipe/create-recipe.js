@@ -17,7 +17,7 @@ export default function CreateRecipe() {
               'Content-Type': 'application/json',
             },
           })
-          const data = await res.json()
+          // const data = await res.json()
         }}
       >
         <label htmlFor="name">
